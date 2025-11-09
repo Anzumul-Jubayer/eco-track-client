@@ -6,6 +6,7 @@ import Home from '../Pages/Home';
 import LoginPage from '../Pages/LoginPage';
 import RegisterPage from '../Pages/RegisterPage';
 import ErrorPage from '../Pages/ErrorPage';
+import ForgotPassword from '../Pages/ForgotPassword';
 
 
 const router = createBrowserRouter([
@@ -25,6 +26,11 @@ const router = createBrowserRouter([
         {
             path:'/register',
             element:<RegisterPage/>
+        }
+        ,
+        {
+            path:'/forgot-password',
+            element:<ForgotPassword></ForgotPassword>
         }
     ]
   },

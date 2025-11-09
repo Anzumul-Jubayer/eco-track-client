@@ -40,7 +40,7 @@ const Login = () => {
             Login
           </button>
         </form>
-
+        <div className="my-2"><Link to='/forgot-password' className="link link-hover text-gray-400">Forgot password?</Link></div>
         <div className="divider text-gray-500 text-sm">OR</div>
 
         <button className="w-full flex items-center justify-center gap-3 border border-gray-300 py-3 rounded-xl font-semibold hover:bg-gray-50 transition-all">
