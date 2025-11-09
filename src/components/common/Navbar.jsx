@@ -54,8 +54,8 @@ const Navbar = () => {
 
         
         <div className="navbar-end">
-          <Link className="border-2 px-2 py-1 rounded-2xl border-green-400 font-medium">Login</Link>
-          <Link className="btn ml-2 bg-green-600 font-medium rounded-2xl">Register</Link>
+          <Link to='/login' className="border-2 px-2 py-1 rounded-2xl border-green-400 font-semibold">Login</Link>
+          <Link to='/register' className="btn ml-2 bg-green-600  rounded-2xl font-semibold">Register</Link>
         </div>
       </div>
     </MyContainer>
