@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router";
 import { FcGoogle } from "react-icons/fc";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const RegisterPage = () => {
+  const [show, setShow] = useState(false);
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-green-50 via-emerald-100 to-green-200 px-4">
       <div className="w-full max-w-md bg-white/90 backdrop-blur-xl shadow-lg rounded-2xl p-8 border border-green-100">
@@ -21,7 +23,7 @@ const RegisterPage = () => {
             <input
               type="text"
               placeholder="Your full name"
-              className="input input-bordered w-full rounded-xl border-green-200 focus:border-green-400 focus:ring-2 focus:ring-green-200"
+              className="w-full px-2 py-2 border border-green-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-200"
             />
           </div>
 
@@ -32,7 +34,7 @@ const RegisterPage = () => {
             <input
               type="email"
               placeholder="you@example.com"
-              className="input input-bordered w-full rounded-xl border-green-200 focus:border-green-400 focus:ring-2 focus:ring-green-200"
+              className="w-full px-2 py-2 border border-green-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-200"
             />
           </div>
 
@@ -43,19 +45,26 @@ const RegisterPage = () => {
             <input
               type="url"
               placeholder="https://example.com/photo.jpg"
-              className="input input-bordered w-full rounded-xl border-green-200 focus:border-green-400 focus:ring-2 focus:ring-green-200"
+              className="w-full px-2 py-2 border border-green-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-200"
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-600 mb-1">
+          <div className="relative">
+            <label className="block text-gray-700 font-semibold mb-1">
               Password
             </label>
             <input
-              type="password"
-              placeholder="••••••"
-              className="input input-bordered w-full rounded-xl border-green-200 focus:border-green-400 focus:ring-2 focus:ring-green-200"
+              type={show ? "text" : "password"}
+              placeholder="Enter your password"
+              className="w-full px-2 py-2 border border-green-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-200"
             />
+            <span onClick={() => setShow(!show)}>
+              {show ? (
+                <FaRegEye className="absolute top-11 right-8" />
+              ) : (
+                <FaRegEyeSlash className="absolute top-11 right-8" />
+              )}
+            </span>
           </div>
 
           <button
