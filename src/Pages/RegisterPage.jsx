@@ -6,8 +6,8 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 const RegisterPage = () => {
   const [show, setShow] = useState(false);
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-green-50 via-emerald-100 to-green-200 px-4">
-      <div className="w-full max-w-md bg-white/90 backdrop-blur-xl shadow-lg rounded-2xl p-8 border border-green-100">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-green-50 via-emerald-100 to-green-200 px-4 py-10">
+      <div className="w-full max-w-md bg-white/90 backdrop-blur-xl shadow-lg rounded-2xl p-8 border border-green-100 ">
         <div className="text-center mb-6">
           <h1 className="text-3xl font-bold text-green-700">Join EcoTrack</h1>
           <p className="text-gray-500 text-sm mt-2">

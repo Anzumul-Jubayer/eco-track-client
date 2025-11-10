@@ -7,6 +7,8 @@ import LoginPage from '../Pages/LoginPage';
 import RegisterPage from '../Pages/RegisterPage';
 import ErrorPage from '../Pages/ErrorPage';
 import ForgotPassword from '../Pages/ForgotPassword';
+import Challenges from '../Pages/Challenges';
+import MyActivity from '../Pages/MyActivity';
 
 
 const router = createBrowserRouter([
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
         {
             index:true,
             element:<Home/>
+        },
+        {
+            path:'/challenges',
+            element:<Challenges/>
+        },
+        {
+            path:'/my-activities',
+            element:<MyActivity/>
         },
         {
             path:'/login',
