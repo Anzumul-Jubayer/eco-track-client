@@ -86,7 +86,7 @@ const LoginPage = () => {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-3 rounded-xl font-semibold text-white transition-all ${
+            className={`w-full py-3 rounded-xl font-semibold text-white transition-all cursor-pointer ${
               loading
                 ? "bg-green-400 cursor-not-allowed"
                 : "bg-green-600 hover:bg-green-700"
@@ -111,7 +111,7 @@ const LoginPage = () => {
         <button
           onClick={handleGoogle}
           disabled={loading}
-          className={`w-full flex items-center justify-center gap-3 border border-gray-300 py-3 rounded-xl font-semibold transition-all ${
+          className={`w-full flex items-center justify-center gap-3 border border-gray-300 py-3 rounded-xl font-semibold transition-all cursor-pointer ${
             loading
               ? "bg-gray-100 cursor-not-allowed"
               : "bg-white hover:bg-gray-50"

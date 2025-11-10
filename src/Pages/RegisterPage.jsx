@@ -182,7 +182,7 @@ const RegisterPage = () => {
           <button
             type="submit"
             disabled={loading || !Object.values(checkPassword).every(Boolean)}
-            className={`btn w-full ${
+            className={`btn w-full cursor-pointer ${
               loading
                 ? "bg-green-400 cursor-not-allowed"
                 : "bg-green-600 hover:bg-green-700"
