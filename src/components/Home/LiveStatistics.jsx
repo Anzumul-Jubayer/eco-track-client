@@ -59,7 +59,7 @@ const LiveStatistics = () => {
               key={stat.id}
               data-aos="zoom-in"
               data-aos-delay={stat.delay}
-              className={`p-6 rounded-2xl shadow-md bg-gradient-to-br ${stat.color} hover:scale-105 transition-transform duration-300`}
+              className={`p-6 rounded-2xl shadow-md bg-linear-to-br ${stat.color} hover:scale-105 transition-transform duration-300`}
             >
               <div className="flex flex-col items-center">
                 {stat.icon}
