@@ -1,19 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaLeaf, FaRecycle, FaTree, FaBolt } from "react-icons/fa";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 const LiveStatistics = () => {
-  React.useEffect(() => {
+  const [statsData, setStatsData] = useState(null);
+
+  useEffect(() => {
     AOS.init({ duration: 1000, once: true });
+
+    const fetchStats = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/statistics");
+        const data = await res.json();
+        setStatsData(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchStats();
   }, []);
 
+  if (!statsData) return <div>Loading...</div>;
+
+  
   const stats = [
     {
       id: 1,
       icon: <FaLeaf className="text-green-600 text-3xl" />,
       title: "Total CO₂ Saved",
-      value: "12,540 kg",
+      value: statsData.impactTotals["kg CO₂ saved"] || 0 + " kg",
       color: "from-green-100 to-green-50",
       delay: "0",
     },
@@ -21,7 +38,7 @@ const LiveStatistics = () => {
       id: 2,
       icon: <FaRecycle className="text-emerald-600 text-3xl" />,
       title: "Plastic Reduced",
-      value: "8,230 kg",
+      value: statsData.impactTotals["kg plastic saved"] || 0 + " kg",
       color: "from-emerald-100 to-emerald-50",
       delay: "200",
     },
@@ -29,7 +46,7 @@ const LiveStatistics = () => {
       id: 3,
       icon: <FaTree className="text-lime-600 text-3xl" />,
       title: "Trees Planted",
-      value: "2,340",
+      value: statsData.impactTotals["trees planted"] || 0,
       color: "from-lime-100 to-lime-50",
       delay: "400",
     },
@@ -37,7 +54,7 @@ const LiveStatistics = () => {
       id: 4,
       icon: <FaBolt className="text-yellow-600 text-3xl" />,
       title: "Energy Saved",
-      value: "4,720 kWh",
+      value: statsData.impactTotals["kWh saved"] || 0 + " kWh",
       color: "from-yellow-100 to-yellow-50",
       delay: "600",
     },
