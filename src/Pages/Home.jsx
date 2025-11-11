@@ -5,6 +5,7 @@ import HowItWorks from '../components/Home/HowItWorks';
 import LiveStatistics from '../components/Home/LiveStatistics';
 import ActiveChallenges from '../components/Home/ActiveChallenges';
 import RecentTips from '../components/Home/RecentTips';
+import UpcomingEvents from '../components/Home/UpcomingEvents';
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
             <LiveStatistics/>
             <ActiveChallenges/>
             <RecentTips/>
+            <UpcomingEvents/>
             <WhyGoGreen/>
             <HowItWorks/>
         </div>
