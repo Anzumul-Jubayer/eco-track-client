@@ -63,9 +63,7 @@ const ActiveChallenges = () => {
                       {challenge.participants} participants | {challenge.impactMetric.value}{" "}
                       {challenge.impactMetric.unit}
                     </p>
-                    <div className="card-actions mt-3 w-full">
-                      <button className="btn btn-primary w-full">Join Now</button>
-                    </div>
+                    
                   </div>
                 </div>
               ))}
