@@ -20,6 +20,9 @@ const Navbar = () => {
       <NavLink to="/my-activities" className="lg:mr-10 font-semibold">
         My Activities
       </NavLink>
+      <NavLink to="/challenges-add" className="lg:mr-10 font-semibold">
+        Add Challenge
+      </NavLink>
     </>
   );
 

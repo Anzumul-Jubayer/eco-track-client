@@ -60,7 +60,7 @@ const Challenges = () => {
           All Challenges
         </h1>
 
-        {/* Filters */}
+        
         <div className="flex flex-wrap gap-4 justify-center mb-12">
           <select
             name="category"
@@ -114,7 +114,7 @@ const Challenges = () => {
           </button>
         </div>
 
-        {/* Challenges Grid */}
+        
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center">
           {loading
             ? Array.from({ length: skeletonCount }).map((_, idx) => <Skeleton key={idx} />)
