@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaLeaf, FaRecycle, FaTree, FaBolt } from "react-icons/fa";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Loading from "../common/Loading";
 
 const LiveStatistics = () => {
   const [statsData, setStatsData] = useState(null);
@@ -22,7 +23,7 @@ const LiveStatistics = () => {
     fetchStats();
   }, []);
 
-  if (!statsData) return <div>Loading...</div>;
+  if (!statsData) return <Loading/>
 
   
   const stats = [
