@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Skeleton from "../components/common/Skeleton";
+import { Link } from "react-router";
 
 const categories = [
   "Waste Reduction",
@@ -150,9 +151,9 @@ const Challenges = () => {
                       </span>
                     </div>
                     <div className="card-actions mt-4">
-                      <button className="btn btn-gradient btn-sm w-full bg-green-500 hover:bg-green-600 text-white font-semibold">
-                        Join Now
-                      </button>
+                      <Link  to={`/challenges/${challenge._id}`} className="btn btn-gradient btn-sm w-full bg-green-500 hover:bg-green-600 text-white font-semibold">
+                        View Details
+                      </Link>
                     </div>
                   </div>
                 </div>

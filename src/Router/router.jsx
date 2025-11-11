@@ -9,6 +9,7 @@ import ErrorPage from '../Pages/ErrorPage';
 import ForgotPassword from '../Pages/ForgotPassword';
 import Challenges from '../Pages/Challenges';
 import MyActivity from '../Pages/MyActivity';
+import ChallengeDetails from '../Pages/ChallengeDetails';
 
 
 const router = createBrowserRouter([
@@ -24,7 +25,12 @@ const router = createBrowserRouter([
         {
             path:'/challenges',
             element:<Challenges/>,
-            loader:()=>fetch('http://localhost:3000/challenges')
+            // loader:()=>fetch('http://localhost:3000/challenges')
+        },
+        {
+            path:'/challenges/:id',
+            element:<ChallengeDetails/>,
+            loader:({params})=>fetch(`http://localhost:3000/challenges/${params.id}`)
         },
         {
             path:'/my-activities',
