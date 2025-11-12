@@ -15,6 +15,7 @@ import AddNewChallenges from "../Pages/AddNewChallenges";
 import PrivateRoute from "./PrivateRoute";
 import JoinChallenge from "../Pages/JoinChallenge";
 import MyActivitiesUpdate from "../Pages/MyActivitiesUpdate";
+import Profile from "../Pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: "/my-activities/:id",
         element: <PrivateRoute><MyActivitiesUpdate/></PrivateRoute>,
+      },
+      {
+        path: "/profile",
+        element: <Profile/>,
       },
       {
         path: "/login",
