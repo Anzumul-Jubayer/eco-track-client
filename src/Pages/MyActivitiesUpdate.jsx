@@ -7,7 +7,7 @@ const MyActivitiesUpdate = () => {
   const [activity, setActivity] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Fetch single user challenge
+  
   const fetchActivity = async () => {
     try {
       const res = await fetch(`http://localhost:3000/user-challenges/item/${id}`);
@@ -24,7 +24,7 @@ const MyActivitiesUpdate = () => {
     fetchActivity();
   }, [id]);
 
-  // Handle progress update (auto +10%)
+ 
   const handleProgressUpdate = async () => {
     if (!activity) return;
 
@@ -63,14 +63,20 @@ const MyActivitiesUpdate = () => {
       <p className="mb-2 text-gray-700">
         <strong>Status:</strong> {activity.status}
       </p>
+
       <div className="w-full bg-gray-200 rounded-full h-4 mb-2">
         <div
           className="bg-green-500 h-4 rounded-full"
           style={{ width: `${activity.progress}%` }}
         ></div>
       </div>
-      <p className="text-sm text-gray-600 mb-6">
+      <p className="text-sm text-gray-600 mb-2">
         {activity.progress}% completed
+      </p>
+
+      
+      <p className="text-xs text-gray-500 mb-6">
+        Last updated: {new Date(activity.lastUpdated).toLocaleString()}
       </p>
 
       <button
@@ -82,7 +88,7 @@ const MyActivitiesUpdate = () => {
             : "bg-green-600 hover:bg-green-700 text-white"
         }`}
       >
-        {activity.progress >= 100 ? "Challenge Completed 🎉" : "Update Progress +10%"}
+        {activity.progress >= 100 ? "Challenge Completed" : "Update Progress +10%"}
       </button>
     </section>
   );

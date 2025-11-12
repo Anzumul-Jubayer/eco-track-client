@@ -8,14 +8,14 @@ const MyActivities = () => {
   const userEmail = user?.email;
   const navigate = useNavigate();
 
-  // Fetch user's challenges with challengeTitle from backend
+  
   const fetchUserChallenges = async () => {
     if (!userEmail) return;
     try {
       const res = await fetch(`http://localhost:3000/my-activities/${userEmail}`);
       const data = await res.json();
       setUserChallenges(data);
-      console.log("Fetched user challenges:", data); // Debug
+      console.log("Fetched user challenges:", data);
     } catch (err) {
       console.error(err);
     }
