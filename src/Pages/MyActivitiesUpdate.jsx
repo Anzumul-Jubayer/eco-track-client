@@ -7,10 +7,11 @@ const MyActivitiesUpdate = () => {
   const [activity, setActivity] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  
   const fetchActivity = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/user-challenges/item/${id}`);
+      const res = await fetch(
+        `https://eco-track-server-pied.vercel.app/user-challenges/item/${id}`
+      );
       const data = await res.json();
       setActivity(data);
     } catch (err) {
@@ -24,7 +25,6 @@ const MyActivitiesUpdate = () => {
     fetchActivity();
   }, [id]);
 
- 
   const handleProgressUpdate = async () => {
     if (!activity) return;
 
@@ -32,11 +32,14 @@ const MyActivitiesUpdate = () => {
     let newStatus = newProgress === 100 ? "Finished" : "Ongoing";
 
     try {
-      const res = await fetch(`http://localhost:3000/user-challenges/update/${id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ progress: newProgress, status: newStatus }),
-      });
+      const res = await fetch(
+        `https://eco-track-server-pied.vercel.app/user-challenges/update/${id}`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ progress: newProgress, status: newStatus }),
+        }
+      );
 
       const data = await res.json();
 
@@ -53,7 +56,8 @@ const MyActivitiesUpdate = () => {
   };
 
   if (loading) return <p className="text-center py-20">Loading...</p>;
-  if (!activity) return <p className="text-center py-20">Activity not found.</p>;
+  if (!activity)
+    return <p className="text-center py-20">Activity not found.</p>;
 
   return (
     <section className="max-w-xl mx-auto py-20 px-6 bg-white shadow rounded-lg">
@@ -74,7 +78,6 @@ const MyActivitiesUpdate = () => {
         {activity.progress}% completed
       </p>
 
-      
       <p className="text-xs text-gray-500 mb-6">
         Last updated: {new Date(activity.lastUpdated).toLocaleString()}
       </p>
@@ -88,7 +91,9 @@ const MyActivitiesUpdate = () => {
             : "bg-green-600 hover:bg-green-700 text-white"
         }`}
       >
-        {activity.progress >= 100 ? "Challenge Completed" : "Update Progress +10%"}
+        {activity.progress >= 100
+          ? "Challenge Completed"
+          : "Update Progress +10%"}
       </button>
     </section>
   );

@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../Context/AuthContext";
 
 const AddNewChallenges = () => {
-  const {user}=use(AuthContext)
+  const { user } = use(AuthContext);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -14,7 +14,7 @@ const AddNewChallenges = () => {
     startDate: "",
     endDate: "",
     impactMetric: { value: "", unit: "" },
-    created_by: user.email
+    created_by: user.email,
   });
 
   const [loading, setLoading] = useState(false);
@@ -45,60 +45,60 @@ const AddNewChallenges = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
+    e.preventDefault();
+    setLoading(true);
 
-  
-  if (!formData.title || !formData.description || !formData.category) {
-    toast.error("❌ Title, Description and Category are required");
-    setLoading(false);
-    return;
-  }
-
-  try {
-    
-    const payload = {
-      ...formData,
-      duration: parseInt(formData.duration) || 0,
-      participants: parseInt(formData.participants) || 0,
-      impactMetric: {
-        value: parseFloat(formData.impactMetric.value) || 0,
-        unit: formData.impactMetric.unit,
-      },
-    };
-
-    const res = await fetch("http://localhost:3000/challenges-add", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-      toast.success("✅ Challenge added successfully!");
-      setFormData({
-        title: "",
-        description: "",
-        category: "",
-        duration: "",
-        participants: "",
-        imageUrl: "",
-        startDate: "",
-        endDate: "",
-        impactMetric: { value: "", unit: "" },
-      });
-    } else {
-      toast.error(`❌ ${data.error}`);
+    if (!formData.title || !formData.description || !formData.category) {
+      toast.error("❌ Title, Description and Category are required");
+      setLoading(false);
+      return;
     }
-  } catch (err) {
-    console.error(err);
-    toast.error("❌ Failed to add challenge");
-  } finally {
-    setLoading(false);
-  }
-};
 
+    try {
+      const payload = {
+        ...formData,
+        duration: parseInt(formData.duration) || 0,
+        participants: parseInt(formData.participants) || 0,
+        impactMetric: {
+          value: parseFloat(formData.impactMetric.value) || 0,
+          unit: formData.impactMetric.unit,
+        },
+      };
+
+      const res = await fetch(
+        "https://eco-track-server-pied.vercel.app/challenges-add",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const data = await res.json();
+
+      if (res.ok) {
+        toast.success("✅ Challenge added successfully!");
+        setFormData({
+          title: "",
+          description: "",
+          category: "",
+          duration: "",
+          participants: "",
+          imageUrl: "",
+          startDate: "",
+          endDate: "",
+          impactMetric: { value: "", unit: "" },
+        });
+      } else {
+        toast.error(`❌ ${data.error}`);
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("❌ Failed to add challenge");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section className="py-16 bg-green-50 min-h-screen">

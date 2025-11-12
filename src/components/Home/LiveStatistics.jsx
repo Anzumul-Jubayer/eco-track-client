@@ -12,7 +12,7 @@ const LiveStatistics = () => {
 
     const fetchStats = async () => {
       try {
-        const res = await fetch("http://localhost:3000/statistics");
+        const res = await fetch("https://eco-track-server-pied.vercel.app/statistics");
         const data = await res.json();
         setStatsData(data);
       } catch (err) {

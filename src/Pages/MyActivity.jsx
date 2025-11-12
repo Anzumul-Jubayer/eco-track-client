@@ -8,11 +8,12 @@ const MyActivities = () => {
   const userEmail = user?.email;
   const navigate = useNavigate();
 
-  
   const fetchUserChallenges = async () => {
     if (!userEmail) return;
     try {
-      const res = await fetch(`http://localhost:3000/my-activities/${userEmail}`);
+      const res = await fetch(
+        `https://eco-track-server-pied.vercel.app/my-activities/${userEmail}`
+      );
       const data = await res.json();
       setUserChallenges(data);
       console.log("Fetched user challenges:", data);
@@ -26,7 +27,6 @@ const MyActivities = () => {
   }, [userEmail]);
 
   const handleUpdateProgress = (id) => {
-    
     navigate(`/my-activities/${id}`);
   };
 

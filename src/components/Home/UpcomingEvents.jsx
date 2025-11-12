@@ -8,7 +8,7 @@ const UpcomingEvents = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch("http://localhost:3000/events-upcoming");
+        const res = await fetch("https://eco-track-server-pied.vercel.app/events-upcoming");
         const data = await res.json();
         setEvents(data);
       } catch (err) {

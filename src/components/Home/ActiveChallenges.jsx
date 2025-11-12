@@ -12,7 +12,9 @@ const ActiveChallenges = () => {
 
     const fetchChallenges = async () => {
       try {
-        const res = await fetch("http://localhost:3000/challenges-active");
+        const res = await fetch(
+          "https://eco-track-server-pied.vercel.app/challenges-active"
+        );
         const data = await res.json();
         setChallenges(data);
       } catch (err) {
@@ -57,13 +59,17 @@ const ActiveChallenges = () => {
                     />
                   </figure>
                   <div className="card-body items-center text-center">
-                    <h2 className="card-title text-green-900">{challenge.title}</h2>
-                    <p className="text-sm text-gray-600">{challenge.category}</p>
+                    <h2 className="card-title text-green-900">
+                      {challenge.title}
+                    </h2>
+                    <p className="text-sm text-gray-600">
+                      {challenge.category}
+                    </p>
                     <p className="text-sm text-gray-800 mt-2">
-                      {challenge.participants} participants | {challenge.impactMetric.value}{" "}
+                      {challenge.participants} participants |{" "}
+                      {challenge.impactMetric.value}{" "}
                       {challenge.impactMetric.unit}
                     </p>
-                    
                   </div>
                 </div>
               ))}

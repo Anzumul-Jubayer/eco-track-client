@@ -15,7 +15,7 @@ const JoinChallenge = () => {
     if (!userEmail) return;
     try {
       const res = await fetch(
-        `http://localhost:3000/user-challenges/${userEmail}`
+        `https://eco-track-server-pied.vercel.app/user-challenges/${userEmail}`
       );
       const data = await res.json();
       const record = data.find(
@@ -34,7 +34,7 @@ const JoinChallenge = () => {
     if (!userEmail) return;
     try {
       const res = await fetch(
-        `http://localhost:3000/challenges-join/${challenge._id}`,
+        `https://eco-track-server-pied.vercel.app/challenges-join/${challenge._id}`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },

@@ -13,7 +13,7 @@ const RecentTips = () => {
 
     const fetchTips = async () => {
       try {
-        const res = await fetch("http://localhost:3000/recent-tips");
+        const res = await fetch("https://eco-track-server-pied.vercel.app/recent-tips");
         const data = await res.json();
         setTips(data);
       } catch (err) {

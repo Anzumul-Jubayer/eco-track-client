@@ -40,7 +40,7 @@ const Challenges = () => {
       if (filters.participantsMin) query.append("participantsMin", filters.participantsMin);
       if (filters.participantsMax) query.append("participantsMax", filters.participantsMax);
 
-      const res = await fetch(`http://localhost:3000/challenges?${query.toString()}`);
+      const res = await fetch(`https://eco-track-server-pied.vercel.app/challenges?${query.toString()}`);
       const data = await res.json();
       setChallenges(data);
     } catch (err) {

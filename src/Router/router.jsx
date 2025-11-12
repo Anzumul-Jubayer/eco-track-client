@@ -35,7 +35,9 @@ const router = createBrowserRouter([
         path: "/challenges/:id",
         element: <ChallengeDetails />,
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/challenges/${params.id}`),
+          fetch(
+            `https://eco-track-server-pied.vercel.app/challenges/${params.id}`
+          ),
         hydrateFallbackElement: <Loading></Loading>,
       },
       {
@@ -54,20 +56,30 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/challenges/${params.id}`),
+          fetch(
+            `https://eco-track-server-pied.vercel.app/challenges/${params.id}`
+          ),
       },
       {
         path: "/my-activities",
-        element: <PrivateRoute><MyActivity /></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <MyActivity />
+          </PrivateRoute>
+        ),
       },
-      
+
       {
         path: "/my-activities/:id",
-        element: <PrivateRoute><MyActivitiesUpdate/></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <MyActivitiesUpdate />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/profile",
-        element: <Profile/>,
+        element: <Profile />,
       },
       {
         path: "/login",
