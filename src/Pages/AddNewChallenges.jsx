@@ -45,48 +45,60 @@ const AddNewChallenges = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+  e.preventDefault();
+  setLoading(true);
 
-    // Frontend validation for required fields
-    if (!formData.title || !formData.description || !formData.category) {
-      toast.error("❌ Title, Description and Category are required");
-      setLoading(false);
-      return;
-    }
+  
+  if (!formData.title || !formData.description || !formData.category) {
+    toast.error("❌ Title, Description and Category are required");
+    setLoading(false);
+    return;
+  }
 
-    try {
-      const res = await fetch("http://localhost:3000/challenges-add", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+  try {
+    
+    const payload = {
+      ...formData,
+      duration: parseInt(formData.duration) || 0,
+      participants: parseInt(formData.participants) || 0,
+      impactMetric: {
+        value: parseFloat(formData.impactMetric.value) || 0,
+        unit: formData.impactMetric.unit,
+      },
+    };
+
+    const res = await fetch("http://localhost:3000/challenges-add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      toast.success("✅ Challenge added successfully!");
+      setFormData({
+        title: "",
+        description: "",
+        category: "",
+        duration: "",
+        participants: "",
+        imageUrl: "",
+        startDate: "",
+        endDate: "",
+        impactMetric: { value: "", unit: "" },
       });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        toast.success("✅ Challenge added successfully!");
-        setFormData({
-          title: "",
-          description: "",
-          category: "",
-          duration: "",
-          participants: "",
-          imageUrl: "",
-          startDate: "",
-          endDate: "",
-          impactMetric: { value: "", unit: "" },
-        });
-      } else {
-        toast.error(`❌ ${data.error}`);
-      }
-    } catch (err) {
-      console.error(err);
-      toast.error("❌ Failed to add challenge");
-    } finally {
-      setLoading(false);
+    } else {
+      toast.error(`❌ ${data.error}`);
     }
-  };
+  } catch (err) {
+    console.error(err);
+    toast.error("❌ Failed to add challenge");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <section className="py-16 bg-green-50 min-h-screen">
