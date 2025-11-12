@@ -3,6 +3,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Link } from "react-router";
 
 const featuredChallenges = [
   {
@@ -55,9 +56,9 @@ const HeroSlider = () => {
                   {item.title}
                 </h2>
                 <p className="text-lg md:text-xl mb-6">{item.description}</p>
-                <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition">
+                <Link to='/challenges' className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition">
                   View Challenge
-                </button>
+                </Link>
               </div>
             </div>
           </SwiperSlide>
