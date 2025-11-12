@@ -14,6 +14,7 @@ import Loading from "../components/common/Loading";
 import AddNewChallenges from "../Pages/AddNewChallenges";
 import PrivateRoute from "./PrivateRoute";
 import JoinChallenge from "../Pages/JoinChallenge";
+import MyActivitiesUpdate from "../Pages/MyActivitiesUpdate";
 
 const router = createBrowserRouter([
   {
@@ -56,7 +57,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/my-activities",
-        element: <MyActivity />,
+        element: <PrivateRoute><MyActivity /></PrivateRoute>,
+      },
+      
+      {
+        path: "/my-activities/:id",
+        element: <PrivateRoute><MyActivitiesUpdate/></PrivateRoute>,
       },
       {
         path: "/login",
