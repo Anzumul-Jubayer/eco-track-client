@@ -73,4 +73,37 @@ bash
 npm run dev
 Open in browser
 
+📌 Server (Backend)
+
+Clone the server repo
+
+git clone https://github.com/yourusername/ecotrack-server.git
+
+
+Go to folder
+
+cd ecotrack-server
+
+
+Install backend dependencies
+
+npm install
+
+
+Create a .env file
+
+MONGODB_URI=your_mongodb_uri
+FIREBASE_API_KEY=your_firebase_key
+PORT=5000
+
+
+Start server
+
+node index.js
+
+
+Server runs at
+
+http://localhost:3000
+
 
