@@ -16,6 +16,11 @@ import PrivateRoute from "./PrivateRoute";
 import JoinChallenge from "../Pages/JoinChallenge";
 import MyActivitiesUpdate from "../Pages/MyActivitiesUpdate";
 import Profile from "../Pages/Profile";
+import About from "../Pages/About";
+import Contact from "../Pages/Contact";
+import Accessibility from "../Pages/Accessibility";
+import Privacy from "../Pages/privacy";
+import Terms from "../Pages/Terms";
 
 const router = createBrowserRouter([
   {
@@ -92,6 +97,26 @@ const router = createBrowserRouter([
       {
         path: "/forgot-password",
         element: <ForgotPassword></ForgotPassword>,
+      },
+      {
+        path: "/about",
+        element: <About/>,
+      },
+      {
+        path: "/contact",
+        element: <Contact/>,
+      },
+      {
+        path: "/accessibility",
+        element: <Accessibility/>,
+      },
+      {
+        path: "/privacy",
+        element: <Privacy/>,
+      },
+      {
+        path: "/terms",
+        element: <Terms/>,
       },
     ],
   },

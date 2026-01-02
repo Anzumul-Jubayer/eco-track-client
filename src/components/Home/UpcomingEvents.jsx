@@ -8,7 +8,9 @@ const UpcomingEvents = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch("https://eco-track-server-pied.vercel.app/events-upcoming");
+        const res = await fetch(
+          "https://eco-track-server-pied.vercel.app/events-upcoming"
+        );
         const data = await res.json();
         setEvents(data);
       } catch (err) {
@@ -30,38 +32,53 @@ const UpcomingEvents = () => {
           Upcoming Events
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {loading
-            ? Array.from({ length: skeletonCount }).map((_, idx) => (
-                <div key={idx} className="w-full max-w-sm mx-auto">
-                  <Skeleton />
+        
+        {loading && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {Array.from({ length: skeletonCount }).map((_, idx) => (
+              <div key={idx} className="w-full max-w-sm mx-auto">
+                <Skeleton />
+              </div>
+            ))}
+          </div>
+        )}
+
+        
+        {!loading && events.length === 0 && (
+          <p className="text-center text-gray-600 text-lg">
+            No upcoming events at the moment.  
+            Stay tuned for exciting eco-friendly events 
+          </p>
+        )}
+
+       
+        {!loading && events.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {events.map((event, idx) => (
+              <div
+                key={idx}
+                className="card bg-base-100 w-full max-w-sm mx-auto shadow-md hover:scale-105 transition-transform duration-300"
+              >
+                <div className="card-body text-center items-center">
+                  <h2 className="card-title text-green-900 text-center">
+                    {event.title}
+                  </h2>
+                  <p className="text-sm text-gray-600 mt-1">
+                    {event.location}
+                  </p>
+                  <p className="text-sm text-gray-800 mt-2">
+                    {new Date(event.date).toLocaleDateString()} |{" "}
+                    {event.currentParticipants}/{event.maxParticipants}{" "}
+                    participants
+                  </p>
+                  <p className="text-gray-700 mt-2 line-clamp-3">
+                    {event.description}
+                  </p>
                 </div>
-              ))
-            : events.map((event, idx) => (
-                <div
-                  key={idx}
-                  className="card bg-base-100 w-full max-w-sm mx-auto shadow-md hover:scale-105 transition-transform duration-300"
-                >
-                 
-                  <div className="card-body text-center items-center">
-                    <h2 className="card-title text-green-900 text-center">
-                      {event.title}
-                    </h2>
-                    <p className="text-sm text-gray-600 mt-1">
-                      {event.location}
-                    </p>
-                    <p className="text-sm text-gray-800 mt-2">
-                      {new Date(event.date).toLocaleDateString()} |{" "}
-                      {event.currentParticipants}/{event.maxParticipants}{" "}
-                      participants
-                    </p>
-                    <p className="text-gray-700 mt-2 line-clamp-3">
-                      {event.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-        </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

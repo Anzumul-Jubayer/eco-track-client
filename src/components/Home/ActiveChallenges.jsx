@@ -27,7 +27,7 @@ const ActiveChallenges = () => {
     fetchChallenges();
   }, []);
 
-  const skeletonCount = challenges.length > 0 ? challenges.length : 6;
+  const skeletonCount = 6;
 
   return (
     <section className="py-16 bg-linear-to-br from-green-50 to-emerald-100">
@@ -39,41 +39,60 @@ const ActiveChallenges = () => {
           Active Challenges
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center">
-          {loading
-            ? Array.from({ length: skeletonCount }).map((_, idx) => (
-                <Skeleton key={idx} />
-              ))
-            : challenges.slice(0, 6).map((challenge, idx) => (
-                <div
-                  key={idx}
-                  data-aos="zoom-in"
-                  data-aos-delay={idx * 100}
-                  className="card bg-base-100 w-full max-w-sm shadow-md hover:scale-105 transition-transform duration-300"
-                >
-                  <figure className="px-4 pt-4">
-                    <img
-                      src={challenge.imageUrl}
-                      alt={challenge.title}
-                      className="rounded-xl object-cover h-48 w-full"
-                    />
-                  </figure>
-                  <div className="card-body items-center text-center">
-                    <h2 className="card-title text-green-900">
-                      {challenge.title}
-                    </h2>
-                    <p className="text-sm text-gray-600">
-                      {challenge.category}
-                    </p>
-                    <p className="text-sm text-gray-800 mt-2">
-                      {challenge.participants} participants |{" "}
-                      {challenge.impactMetric.value}{" "}
-                      {challenge.impactMetric.unit}
-                    </p>
-                  </div>
+        {/* Loading state */}
+        {loading && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center">
+            {Array.from({ length: skeletonCount }).map((_, idx) => (
+              <Skeleton key={idx} />
+            ))}
+          </div>
+        )}
+
+        {/* No data state */}
+        {!loading && challenges.length === 0 && (
+          <p
+            className="text-center text-gray-600 text-lg"
+            data-aos="fade-up"
+          >
+            No active challenges available right now.  
+            Check back soon to join new sustainability challenges 
+          </p>
+        )}
+
+        {/* Data state */}
+        {!loading && challenges.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center">
+            {challenges.slice(0, 6).map((challenge, idx) => (
+              <div
+                key={idx}
+                data-aos="zoom-in"
+                data-aos-delay={idx * 100}
+                className="card bg-base-100 w-full max-w-sm shadow-md hover:scale-105 transition-transform duration-300"
+              >
+                <figure className="px-4 pt-4">
+                  <img
+                    src={challenge.imageUrl}
+                    alt={challenge.title}
+                    className="rounded-xl object-cover h-48 w-full"
+                  />
+                </figure>
+                <div className="card-body items-center text-center">
+                  <h2 className="card-title text-green-900">
+                    {challenge.title}
+                  </h2>
+                  <p className="text-sm text-gray-600">
+                    {challenge.category}
+                  </p>
+                  <p className="text-sm text-gray-800 mt-2">
+                    {challenge.participants} participants |{" "}
+                    {challenge.impactMetric.value}{" "}
+                    {challenge.impactMetric.unit}
+                  </p>
                 </div>
-              ))}
-        </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
