@@ -7,39 +7,71 @@ import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const [show, setShow] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const { signIn, signInGoogle, setUser, loading, SetLoading } =
     useContext(AuthContext);
   const navigate = useNavigate();
 
+  //  Normal Login
   const handleLogin = (e) => {
     e.preventDefault();
     SetLoading(true);
 
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-
     signIn(email, password)
       .then((res) => {
-        const user = res.user;
-        setUser(user);
+        setUser(res.user);
         toast.success("Login successful!");
         navigate("/");
-        e.target.reset();
       })
       .catch((error) => toast.error(error.code))
       .finally(() => SetLoading(false));
   };
 
-  const handleGoogle = () => {
+  //  Google Login
+  const handleGoogle = async () => {
     SetLoading(true);
-    signInGoogle()
+    try {
+      const res = await signInGoogle();
+      const user = res.user;
+
+      await fetch("http://localhost:3000/users", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          name: user.displayName,
+          email: user.email,
+          photo: user.photoURL,
+        }),
+      });
+
+      setUser(user);
+      toast.success("Google login successful!");
+      navigate("/");
+    } catch (err) {
+      toast.error(err.code);
+    } finally {
+      SetLoading(false);
+    }
+  };
+
+  //  Demo Login
+  const handleDemoLogin = () => {
+    const demoEmail = "kablumama@gmail.com";
+    const demoPassword = "Abc@12";
+
+    setEmail(demoEmail);
+    setPassword(demoPassword);
+
+    SetLoading(true);
+    signIn(demoEmail, demoPassword)
       .then((res) => {
-        const user = res.user;
-        setUser(user);
-        toast.success("Signed in with Google!");
+        setUser(res.user);
+        toast.success("Demo login successful!");
         navigate("/");
       })
-      .catch((error) => toast.error(error.code))
+      .catch((err) => toast.error(err.code))
       .finally(() => SetLoading(false));
   };
 
@@ -50,6 +82,15 @@ const LoginPage = () => {
           Login to <span className="text-green-500">EcoTrack</span>
         </h2>
 
+        
+        <button
+          onClick={handleDemoLogin}
+          disabled={loading}
+          className="w-full mb-4 py-3 rounded-xl font-semibold text-green-700 bg-green-100 hover:bg-green-200 transition-all"
+        >
+           Login as Demo 
+        </button>
+
         <form onSubmit={handleLogin} className="space-y-5">
           <div>
             <label className="block text-gray-700 font-semibold mb-1">
@@ -57,7 +98,8 @@ const LoginPage = () => {
             </label>
             <input
               type="email"
-              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400"
               required
@@ -70,7 +112,8 @@ const LoginPage = () => {
             </label>
             <input
               type={show ? "text" : "password"}
-              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400"
               required
@@ -86,7 +129,7 @@ const LoginPage = () => {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-3 rounded-xl font-semibold text-white transition-all cursor-pointer ${
+            className={`w-full py-3 rounded-xl font-semibold text-white transition-all ${
               loading
                 ? "bg-green-400 cursor-not-allowed"
                 : "bg-green-600 hover:bg-green-700"
@@ -111,18 +154,10 @@ const LoginPage = () => {
         <button
           onClick={handleGoogle}
           disabled={loading}
-          className={`w-full flex items-center justify-center gap-3 border border-gray-300 py-3 rounded-xl font-semibold transition-all cursor-pointer ${
-            loading
-              ? "bg-gray-100 cursor-not-allowed"
-              : "bg-white hover:bg-gray-50"
-          }`}
+          className="w-full flex items-center justify-center gap-3 border border-gray-300 py-3 rounded-xl font-semibold transition-all"
         >
-          <FcGoogle size={22} />{" "}
-          {loading ? (
-            <span className="loading loading-spinner loading-md"></span>
-          ) : (
-            "Continue with Google"
-          )}
+          <FcGoogle size={22} />
+          Continue with Google
         </button>
 
         <p className="text-center text-gray-600 mt-6 text-sm">
