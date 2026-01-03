@@ -7,7 +7,8 @@ import toast from "react-hot-toast";
 
 const RegisterPage = () => {
   const [show, setShow] = useState(false);
-  const [password, setPassword] = useState(""); 
+  const [password, setPassword] = useState("");
+
   const {
     createUser,
     setUser,
@@ -19,6 +20,7 @@ const RegisterPage = () => {
 
   const navigate = useNavigate();
 
+  
   const handleRegister = (e) => {
     e.preventDefault();
     SetLoading(true);
@@ -30,15 +32,30 @@ const RegisterPage = () => {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{6,}$/;
 
     if (!passwordRegex.test(password)) {
+      toast.error("Password does not meet requirements");
       SetLoading(false);
-      return; 
+      return;
     }
 
     createUser(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+
         updateProfileFunc(user, name, photo)
-          .then(() => {
+          .then(async () => {
+            
+            await fetch("http://localhost:3000/users", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify({
+                name,
+                email,
+                photo,
+              }),
+            });
+
             setUser({ ...user, displayName: name, photoURL: photo });
             toast.success("Registration successful");
             e.target.reset();
@@ -54,11 +71,26 @@ const RegisterPage = () => {
       });
   };
 
+  
   const handleGoogle = () => {
     SetLoading(true);
     signInGoogle()
-      .then((res) => {
+      .then(async (res) => {
         const user = res.user;
+
+      
+        await fetch("http://localhost:3000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            name: user.displayName,
+            email: user.email,
+            photo: user.photoURL,
+          }),
+        });
+
         setUser(user);
         toast.success("Signed up with Google!");
         navigate("/");
@@ -81,7 +113,7 @@ const RegisterPage = () => {
         <div className="text-center mb-6">
           <h1 className="text-3xl font-bold text-green-700">Join EcoTrack</h1>
           <p className="text-gray-500 text-sm mt-2">
-            Start your sustainable journey today 🌿
+            Start your sustainable journey today
           </p>
         </div>
 
@@ -125,7 +157,6 @@ const RegisterPage = () => {
             />
           </div>
 
-          
           <div className="relative">
             <label className="block text-gray-700 font-semibold mb-1">
               Password
@@ -146,34 +177,17 @@ const RegisterPage = () => {
               {show ? <FaRegEye /> : <FaRegEyeSlash />}
             </span>
 
-            
             <ul className="text-sm mt-2 space-y-1">
-              <li
-                className={
-                  checkPassword.uppercase ? "text-green-600" : "text-red-500"
-                }
-              >
+              <li className={checkPassword.uppercase ? "text-green-600" : "text-red-500"}>
                 At least 1 uppercase letter
               </li>
-              <li
-                className={
-                  checkPassword.lowercase ? "text-green-600" : "text-red-500"
-                }
-              >
+              <li className={checkPassword.lowercase ? "text-green-600" : "text-red-500"}>
                 At least 1 lowercase letter
               </li>
-              <li
-                className={
-                  checkPassword.special ? "text-green-600" : "text-red-500"
-                }
-              >
+              <li className={checkPassword.special ? "text-green-600" : "text-red-500"}>
                 At least 1 special character
               </li>
-              <li
-                className={
-                  checkPassword.length ? "text-green-600" : "text-red-500"
-                }
-              >
+              <li className={checkPassword.length ? "text-green-600" : "text-red-500"}>
                 Minimum 6 characters
               </li>
             </ul>
@@ -182,7 +196,7 @@ const RegisterPage = () => {
           <button
             type="submit"
             disabled={loading || !Object.values(checkPassword).every(Boolean)}
-            className={`btn w-full cursor-pointer ${
+            className={`btn w-full ${
               loading
                 ? "bg-green-400 cursor-not-allowed"
                 : "bg-green-600 hover:bg-green-700"
@@ -207,7 +221,7 @@ const RegisterPage = () => {
                 : "bg-white hover:bg-green-50"
             } text-gray-700 rounded-xl flex items-center justify-center gap-2`}
           >
-            <FcGoogle size={22} />{" "}
+            <FcGoogle size={22} />
             {loading ? (
               <span className="loading loading-spinner loading-xl"></span>
             ) : (
@@ -218,10 +232,7 @@ const RegisterPage = () => {
 
         <p className="text-center text-sm text-gray-600 mt-6">
           Already have an account?{" "}
-          <Link
-            to="/login"
-            className="text-green-700 font-medium hover:underline"
-          >
+          <Link to="/login" className="text-green-700 font-medium hover:underline">
             Login here
           </Link>
         </p>

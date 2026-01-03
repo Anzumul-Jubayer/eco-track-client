@@ -21,7 +21,7 @@ const Navbar = () => {
         Our Mission
       </NavLink>
       <NavLink to="/tips" className="lg:mr-10 font-semibold">
-       Eco Tips 
+        Eco Tips
       </NavLink>
       <NavLink to="/my-activities" className="lg:mr-10 font-semibold">
         My Activities
@@ -35,14 +35,14 @@ const Navbar = () => {
   const handleLogout = () => {
     signOutFunc()
       .then(() => {
-        setUser(null); 
+        setUser(null);
         toast.success("SignOut Successful");
       })
       .catch((error) => toast.error(error.code));
   };
 
   return (
-    <div className="bg-green-50 sticky top-0 z-50">
+    <div className="bg-green-50 sticky top-0 z-50 py-2 lg:px-10">
       <MyContainer>
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center">
@@ -72,18 +72,24 @@ const Navbar = () => {
             </div>
 
             {/* Logo */}
-            <div className="flex items-center ml-2">
-              <img src={logo} alt="EcoTrack Logo" className="w-16 md:w-20" />
-              <p className="text-xs md:text-xl font-semibold ml-2">
+            <div className="flex items-center">
+             <div>
+               <img src={logo} alt="EcoTrack Logo" className="w-8 md:w-12" />
+             </div>
+              <div>
+                <p className="text-xs md:text-xl font-semibold text-gray-800 flex items-center">
                 ECO<span className="text-green-600">TRACK</span>
               </p>
+              </div>
             </div>
           </div>
 
           <div className="hidden lg:flex">{links}</div>
 
           <div className="flex items-center gap-2">
-            {loading?<span className="loading loading-ring loading-xl"></span>:user ? (
+            {loading ? (
+              <span className="loading loading-ring loading-xl"></span>
+            ) : user ? (
               <div className="dropdown dropdown-end">
                 <label
                   tabIndex={0}
@@ -109,10 +115,14 @@ const Navbar = () => {
                     </span>
                   </li>
                   <li>
-                    <Link to="/profile" className=" text-green-400">Profile</Link>
+                    <Link to="/profile" className=" text-green-400">
+                      Profile
+                    </Link>
                   </li>
                   <li>
-                    <Link to="/my-activities" className=" text-green-400">My Activities</Link>
+                    <Link to="/my-activities" className=" text-green-400">
+                      My Activities
+                    </Link>
                   </li>
                   <li>
                     <button
@@ -120,7 +130,6 @@ const Navbar = () => {
                       className="w-full text-left text-green-400"
                       disabled={loading}
                     >
-                     
                       Logout <TbLogout2 />
                     </button>
                   </li>
