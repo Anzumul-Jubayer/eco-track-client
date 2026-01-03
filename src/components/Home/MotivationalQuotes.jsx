@@ -24,7 +24,7 @@ const MotivationalQuotes = () => {
   };
 
   return (
-    <section className="py-16 px-4 text-center bg-linear-to-br from-green-200 via-emerald-200 to-green-100">
+    <section className="py-16 px-4 text-center bg-linear-to-br from-green-50 to-emerald-100">
       <h2 className="text-3xl font-bold text-black  mb-6 flex items-center justify-center gap-2">
         <FaLeaf /> Eco Motivation
       </h2>

@@ -17,6 +17,12 @@ const Navbar = () => {
       <NavLink to="/challenges" className="lg:mr-10 font-semibold">
         Challenges
       </NavLink>
+      <NavLink to="/mission" className="lg:mr-10 font-semibold">
+        Our Mission
+      </NavLink>
+      <NavLink to="/tips" className="lg:mr-10 font-semibold">
+       Eco Tips 
+      </NavLink>
       <NavLink to="/my-activities" className="lg:mr-10 font-semibold">
         My Activities
       </NavLink>
@@ -36,7 +42,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-green-50">
+    <div className="bg-green-50 sticky top-0 z-50">
       <MyContainer>
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center">

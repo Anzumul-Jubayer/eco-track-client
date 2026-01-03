@@ -31,7 +31,7 @@ const MyActivities = () => {
   };
 
   return (
-    <section className="max-w-5xl mx-auto py-20 px-4">
+    <section className="max-w-5xl mx-auto py-20 px-4 ">
       <h1 className="text-3xl font-bold text-green-800 mb-8">My Activities</h1>
 
       {userChallenges.length === 0 ? (

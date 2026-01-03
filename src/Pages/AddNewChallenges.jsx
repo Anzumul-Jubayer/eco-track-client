@@ -90,11 +90,11 @@ const AddNewChallenges = () => {
           impactMetric: { value: "", unit: "" },
         });
       } else {
-        toast.error(`❌ ${data.error}`);
+        toast.error(` ${data.error}`);
       }
     } catch (err) {
       console.error(err);
-      toast.error("❌ Failed to add challenge");
+      toast.error(" Failed to add challenge");
     } finally {
       setLoading(false);
     }

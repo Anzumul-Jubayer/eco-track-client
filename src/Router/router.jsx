@@ -21,6 +21,8 @@ import Contact from "../Pages/Contact";
 import Accessibility from "../Pages/Accessibility";
 import Privacy from "../Pages/privacy";
 import Terms from "../Pages/Terms";
+import OurMission from "../Pages/OurMission";
+import SustainabilityTips from "../Pages/SustainabilityTips ";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,15 @@ const router = createBrowserRouter([
       {
         path: "/challenges",
         element: <Challenges />,
+      },
+      
+      {
+        path: "/mission",
+        element: <OurMission />,
+      },
+      {
+        path: "/tips",
+        element: <SustainabilityTips />,
       },
       {
         path: "/challenges/:id",
