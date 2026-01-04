@@ -36,7 +36,7 @@ const LoginPage = () => {
       const res = await signInGoogle();
       const user = res.user;
 
-      await fetch("http://localhost:3000/users", {
+      await fetch("https://eco-track-server-pied.vercel.app/users", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
@@ -56,17 +56,13 @@ const LoginPage = () => {
     }
   };
 
+  const handleDemoLogin = () => {
+    const demoEmail = "rahim@gmail.com";
+    const demoPassword = "Abc@12";
 
-const handleDemoLogin = () => {
-  const demoEmail = "kablumama@gmail.com";
-  const demoPassword = "Abc@12";
-
-  setEmail(demoEmail);
-  setPassword(demoPassword);
-
-  
-};
-
+    setEmail(demoEmail);
+    setPassword(demoPassword);
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-green-50 via-emerald-100 to-green-200 py-10">
@@ -75,13 +71,12 @@ const handleDemoLogin = () => {
           Login to <span className="text-green-500">EcoTrack</span>
         </h2>
 
-        
         <button
           onClick={handleDemoLogin}
           disabled={loading}
           className="w-full mb-4 py-3 rounded-xl font-semibold text-green-700 bg-green-100 hover:bg-green-200 transition-all"
         >
-           Login as Demo 
+          Login as Demo
         </button>
 
         <form onSubmit={handleLogin} className="space-y-5">

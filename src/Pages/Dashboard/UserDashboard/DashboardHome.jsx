@@ -23,7 +23,9 @@ const DashboardHome = () => {
   useEffect(() => {
     if (!user?.email) return;
     setLoading(true);
-    fetch(`http://localhost:3000/my-activities/${user.email}`)
+    fetch(
+      `https://eco-track-server-pied.vercel.app/my-activities/${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setActivities(data);
@@ -44,8 +46,12 @@ const DashboardHome = () => {
   }
 
   const totalChallenges = activities.length;
-  const finishedChallenges = activities.filter((a) => a.status === "Finished").length;
-  const ongoingChallenges = activities.filter((a) => a.status !== "Finished").length;
+  const finishedChallenges = activities.filter(
+    (a) => a.status === "Finished"
+  ).length;
+  const ongoingChallenges = activities.filter(
+    (a) => a.status !== "Finished"
+  ).length;
 
   const pieData = [
     { name: "Completed", value: finishedChallenges },
@@ -67,16 +73,39 @@ const DashboardHome = () => {
         {/* Header */}
         <div className="mb-10 text-center md:text-left">
           <h1 className="text-3xl md:text-4xl font-extrabold text-slate-800">
-            Welcome back, <span className="text-green-600">{user?.displayName?.split(" ")[0]}!</span>
+            Welcome back,{" "}
+            <span className="text-green-600">
+              {user?.displayName?.split(" ")[0]}!
+            </span>
           </h1>
-          <p className="text-slate-500 mt-2 font-medium">Track your eco-impact and progress here.</p>
+          <p className="text-slate-500 mt-2 font-medium">
+            Track your eco-impact and progress here.
+          </p>
         </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-          <StatCard title="Total Joined" value={totalChallenges} icon={<FaTasks />} accentColor="bg-blue-500" lightBg="bg-blue-50" />
-          <StatCard title="Ongoing" value={ongoingChallenges} icon={<FaSpinner className="animate-spin" />} accentColor="bg-indigo-500" lightBg="bg-indigo-50" />
-          <StatCard title="Completed" value={finishedChallenges} icon={<FaCheckCircle />} accentColor="bg-emerald-500" lightBg="bg-emerald-50" />
+          <StatCard
+            title="Total Joined"
+            value={totalChallenges}
+            icon={<FaTasks />}
+            accentColor="bg-blue-500"
+            lightBg="bg-blue-50"
+          />
+          <StatCard
+            title="Ongoing"
+            value={ongoingChallenges}
+            icon={<FaSpinner className="animate-spin" />}
+            accentColor="bg-indigo-500"
+            lightBg="bg-indigo-50"
+          />
+          <StatCard
+            title="Completed"
+            value={finishedChallenges}
+            icon={<FaCheckCircle />}
+            accentColor="bg-emerald-500"
+            lightBg="bg-emerald-50"
+          />
         </div>
 
         {/* Charts + Table */}
@@ -84,12 +113,22 @@ const DashboardHome = () => {
           {/* Pie Chart */}
           <div className="bg-white/80 backdrop-blur-md p-6 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-white h-[400px]">
             <h2 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
-              <span className="w-2 h-6 bg-emerald-500 rounded-full"></span> Status Distribution
+              <span className="w-2 h-6 bg-emerald-500 rounded-full"></span>{" "}
+              Status Distribution
             </h2>
             <ResponsiveContainer width="100%" height="80%">
               <PieChart>
-                <Pie data={pieData} innerRadius="65%" outerRadius="85%" paddingAngle={8} dataKey="value" stroke="none">
-                  {pieData.map((entry, index) => <Cell key={index} fill={COLORS[index]} cornerRadius={8} />)}
+                <Pie
+                  data={pieData}
+                  innerRadius="65%"
+                  outerRadius="85%"
+                  paddingAngle={8}
+                  dataKey="value"
+                  stroke="none"
+                >
+                  {pieData.map((entry, index) => (
+                    <Cell key={index} fill={COLORS[index]} cornerRadius={8} />
+                  ))}
                 </Pie>
                 <Tooltip />
                 <Legend iconType="circle" />
@@ -100,22 +139,39 @@ const DashboardHome = () => {
           {/* Bar Chart */}
           <div className="bg-white/80 backdrop-blur-md p-6 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-white h-[400px]">
             <h2 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
-              <span className="w-2 h-6 bg-indigo-500 rounded-full"></span> Progress Overview (%)
+              <span className="w-2 h-6 bg-indigo-500 rounded-full"></span>{" "}
+              Progress Overview (%)
             </h2>
             <ResponsiveContainer width="100%" height="80%">
               <BarChart data={barData}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                <XAxis dataKey="name" fontSize={11} axisLine={false} tickLine={false} />
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  vertical={false}
+                  stroke="#f1f5f9"
+                />
+                <XAxis
+                  dataKey="name"
+                  fontSize={11}
+                  axisLine={false}
+                  tickLine={false}
+                />
                 <YAxis fontSize={11} axisLine={false} tickLine={false} />
-                <Tooltip cursor={{fill: '#f8fafc'}} />
-                <Bar dataKey="progress" fill="#6366f1" radius={[8, 8, 8, 8]} barSize={35} />
+                <Tooltip cursor={{ fill: "#f8fafc" }} />
+                <Bar
+                  dataKey="progress"
+                  fill="#6366f1"
+                  radius={[8, 8, 8, 8]}
+                  barSize={35}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
 
           {/* Responsive Table */}
           <div className="bg-white/80 backdrop-blur-md p-4 sm:p-6 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-white overflow-x-auto max-h-[400px]">
-            <h2 className="text-lg font-bold text-slate-800 mb-4">My Challenges</h2>
+            <h2 className="text-lg font-bold text-slate-800 mb-4">
+              My Challenges
+            </h2>
             <table className="min-w-full w-full text-left border-collapse">
               <thead>
                 <tr className="text-gray-500 text-[10px] sm:text-xs uppercase tracking-wider">
@@ -127,8 +183,13 @@ const DashboardHome = () => {
               </thead>
               <tbody>
                 {activities.map((act) => (
-                  <tr key={act._id} className="hover:bg-green-50/30 transition-colors">
-                    <td className="px-3 py-2 font-medium">{act.challengeTitle}</td>
+                  <tr
+                    key={act._id}
+                    className="hover:bg-green-50/30 transition-colors"
+                  >
+                    <td className="px-3 py-2 font-medium">
+                      {act.challengeTitle}
+                    </td>
                     <td className="px-3 py-2 text-center">{act.category}</td>
                     <td className="px-3 py-2 text-center">{act.progress}%</td>
                     <td className="px-3 py-2 text-right">
@@ -149,23 +210,34 @@ const DashboardHome = () => {
 const StatCard = ({ title, value, icon, accentColor, lightBg }) => (
   <div className="group bg-white p-6 rounded-3xl shadow-lg shadow-slate-200/40 border border-slate-50 flex items-center justify-between transition-all hover:scale-[1.03]">
     <div className="flex items-center gap-5">
-      <div className={`w-14 h-14 ${lightBg} flex items-center justify-center text-2xl shadow-inner rounded-2xl`}>
+      <div
+        className={`w-14 h-14 ${lightBg} flex items-center justify-center text-2xl shadow-inner rounded-2xl`}
+      >
         {icon}
       </div>
       <div>
-        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{title}</p>
+        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+          {title}
+        </p>
         <p className="text-3xl font-black text-slate-800">{value}</p>
       </div>
     </div>
-    <div className={`h-12 w-1.5 ${accentColor} rounded-full opacity-20 group-hover:opacity-100 transition-opacity`} />
+    <div
+      className={`h-12 w-1.5 ${accentColor} rounded-full opacity-20 group-hover:opacity-100 transition-opacity`}
+    />
   </div>
 );
-
 
 const StatusBadge = ({ status }) => {
   const isFinished = status === "Finished";
   return (
-    <span className={`inline-flex items-center gap-1 font-bold text-[10px] uppercase px-2 py-1 rounded-md whitespace-nowrap ${isFinished ? "bg-green-100 text-green-700" : "bg-indigo-100 text-indigo-700"}`}>
+    <span
+      className={`inline-flex items-center gap-1 font-bold text-[10px] uppercase px-2 py-1 rounded-md whitespace-nowrap ${
+        isFinished
+          ? "bg-green-100 text-green-700"
+          : "bg-indigo-100 text-indigo-700"
+      }`}
+    >
       {status}
     </span>
   );

@@ -3,7 +3,14 @@ import { AuthContext } from "../../../Context/AuthContext";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../../../Firebase/firebase.config";
 import toast from "react-hot-toast";
-import { FaCamera, FaUser, FaEnvelope, FaEdit, FaCheck, FaTimes } from "react-icons/fa";
+import {
+  FaCamera,
+  FaUser,
+  FaEnvelope,
+  FaEdit,
+  FaCheck,
+  FaTimes,
+} from "react-icons/fa";
 
 const Profile = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -34,7 +41,9 @@ const Profile = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:3000/users-update/${encodeURIComponent(user.email)}`,
+        `https://eco-track-server-pied.vercel.app/users-update/${encodeURIComponent(
+          user.email
+        )}`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
@@ -83,7 +92,11 @@ const Profile = () => {
             <div className="p-8 md:p-12 flex flex-col md:flex-row items-center md:items-end gap-8">
               <div className="relative group">
                 <img
-                  src={user?.photoURL || formData.photo || "https://via.placeholder.com/150"}
+                  src={
+                    user?.photoURL ||
+                    formData.photo ||
+                    "https://via.placeholder.com/150"
+                  }
                   alt="Profile"
                   className="w-40 h-40 rounded-3xl object-cover border-8 border-white shadow-2xl transition-transform duration-300 group-hover:scale-105"
                 />
@@ -125,7 +138,10 @@ const Profile = () => {
                       type="button"
                       onClick={() => {
                         setEditable(false);
-                        setFormData({ name: user.displayName, photo: user.photoURL });
+                        setFormData({
+                          name: user.displayName,
+                          photo: user.photoURL,
+                        });
                       }}
                       className="flex items-center gap-2 px-6 py-3 bg-gray-100 text-gray-600 font-bold rounded-2xl hover:bg-gray-200 transition-all"
                     >
@@ -192,16 +208,20 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          
+
           {/* Extra Info Card (Optional Design Element) */}
           <div className="bg-gradient-to-br from-white to-green-50 p-8 rounded-3xl border border-green-100 flex items-center justify-between shadow-sm">
-             <div>
-               <h4 className="font-bold text-green-900 text-lg">Account Status</h4>
-               <p className="text-green-600 font-medium">Your profile is 100% complete and verified.</p>
-             </div>
-             <div className="h-12 w-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg shadow-green-200">
-               ✓
-             </div>
+            <div>
+              <h4 className="font-bold text-green-900 text-lg">
+                Account Status
+              </h4>
+              <p className="text-green-600 font-medium">
+                Your profile is 100% complete and verified.
+              </p>
+            </div>
+            <div className="h-12 w-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg shadow-green-200">
+              ✓
+            </div>
           </div>
         </form>
       </div>

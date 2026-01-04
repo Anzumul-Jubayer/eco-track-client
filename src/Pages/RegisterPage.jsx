@@ -20,7 +20,6 @@ const RegisterPage = () => {
 
   const navigate = useNavigate();
 
-  
   const handleRegister = (e) => {
     e.preventDefault();
     SetLoading(true);
@@ -43,8 +42,7 @@ const RegisterPage = () => {
 
         updateProfileFunc(user, name, photo)
           .then(async () => {
-            
-            await fetch("http://localhost:3000/users", {
+            await fetch("https://eco-track-server-pied.vercel.app/users", {
               method: "POST",
               headers: {
                 "content-type": "application/json",
@@ -71,15 +69,13 @@ const RegisterPage = () => {
       });
   };
 
-  
   const handleGoogle = () => {
     SetLoading(true);
     signInGoogle()
       .then(async (res) => {
         const user = res.user;
 
-      
-        await fetch("http://localhost:3000/users", {
+        await fetch("https://eco-track-server-pied.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -99,7 +95,6 @@ const RegisterPage = () => {
       .finally(() => SetLoading(false));
   };
 
-  
   const checkPassword = {
     length: password.length >= 6,
     uppercase: /[A-Z]/.test(password),
@@ -178,16 +173,32 @@ const RegisterPage = () => {
             </span>
 
             <ul className="text-sm mt-2 space-y-1">
-              <li className={checkPassword.uppercase ? "text-green-600" : "text-red-500"}>
+              <li
+                className={
+                  checkPassword.uppercase ? "text-green-600" : "text-red-500"
+                }
+              >
                 At least 1 uppercase letter
               </li>
-              <li className={checkPassword.lowercase ? "text-green-600" : "text-red-500"}>
+              <li
+                className={
+                  checkPassword.lowercase ? "text-green-600" : "text-red-500"
+                }
+              >
                 At least 1 lowercase letter
               </li>
-              <li className={checkPassword.special ? "text-green-600" : "text-red-500"}>
+              <li
+                className={
+                  checkPassword.special ? "text-green-600" : "text-red-500"
+                }
+              >
                 At least 1 special character
               </li>
-              <li className={checkPassword.length ? "text-green-600" : "text-red-500"}>
+              <li
+                className={
+                  checkPassword.length ? "text-green-600" : "text-red-500"
+                }
+              >
                 Minimum 6 characters
               </li>
             </ul>
@@ -232,7 +243,10 @@ const RegisterPage = () => {
 
         <p className="text-center text-sm text-gray-600 mt-6">
           Already have an account?{" "}
-          <Link to="/login" className="text-green-700 font-medium hover:underline">
+          <Link
+            to="/login"
+            className="text-green-700 font-medium hover:underline"
+          >
             Login here
           </Link>
         </p>

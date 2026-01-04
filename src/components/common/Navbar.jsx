@@ -9,26 +9,32 @@ import { TbLogout2 } from "react-icons/tb";
 const Navbar = () => {
   const { user, signOutFunc, setUser, loading } = useContext(AuthContext);
 
-  const links = (
-    <>
-      <NavLink to="/" className="lg:mr-10 font-semibold">
-        Home
-      </NavLink>
-      <NavLink to="/challenges" className="lg:mr-10 font-semibold">
-        Challenges
-      </NavLink>
-      <NavLink to="/mission" className="lg:mr-10 font-semibold">
-        Our Mission
-      </NavLink>
-      <NavLink to="/tips" className="lg:mr-10 font-semibold">
-        Eco Tips
-      </NavLink>
+ const links = (
+  <>
+    <NavLink to="/" className="lg:mr-10 font-semibold">
+      Home
+    </NavLink>
+
+    <NavLink to="/challenges" className="lg:mr-10 font-semibold">
+      Challenges
+    </NavLink>
+
+    <NavLink to="/mission" className="lg:mr-10 font-semibold">
+      Our Mission
+    </NavLink>
+
+    <NavLink to="/tips" className="lg:mr-10 font-semibold">
+      Eco Tips
+    </NavLink>
+
+    {user && (
       <NavLink to="/my-activities" className="lg:mr-10 font-semibold">
         My Activities
       </NavLink>
-      
-    </>
-  );
+    )}
+  </>
+);
+
 
   const handleLogout = () => {
     signOutFunc()
