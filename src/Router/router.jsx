@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { createBrowserRouter } from "react-router";
 import App from "../App";
 import MainLayout from "../Layouts/MainLayout";
@@ -11,11 +11,11 @@ import Challenges from "../Pages/Challenges";
 import MyActivity from "../Pages/MyActivity";
 import ChallengeDetails from "../Pages/ChallengeDetails";
 import Loading from "../components/common/Loading";
-import AddNewChallenges from "../Pages/AddNewChallenges";
+
 import PrivateRoute from "./PrivateRoute";
 import JoinChallenge from "../Pages/JoinChallenge";
 import MyActivitiesUpdate from "../Pages/MyActivitiesUpdate";
-import Profile from "../Pages/Profile";
+import Profile from "../Pages/Dashboard/UserDashboard/Profile";
 import About from "../Pages/About";
 import Contact from "../Pages/Contact";
 import Accessibility from "../Pages/Accessibility";
@@ -23,6 +23,9 @@ import Privacy from "../Pages/privacy";
 import Terms from "../Pages/Terms";
 import OurMission from "../Pages/OurMission";
 import SustainabilityTips from "../Pages/SustainabilityTips ";
+import UserDashboardLayout from "../Layouts/UserDashboardLayout";
+import AddNewChallenges from "../Pages/Dashboard/UserDashboard/AddNewChallenges";
+import DashboardHome from "../Pages/Dashboard/UserDashboard/DashboardHome";
 
 const router = createBrowserRouter([
   {
@@ -38,7 +41,7 @@ const router = createBrowserRouter([
         path: "/challenges",
         element: <Challenges />,
       },
-      
+
       {
         path: "/mission",
         element: <OurMission />,
@@ -56,14 +59,7 @@ const router = createBrowserRouter([
           ),
         hydrateFallbackElement: <Loading></Loading>,
       },
-      {
-        path: "/challenges-add",
-        element: (
-          <PrivateRoute>
-            <AddNewChallenges />
-          </PrivateRoute>
-        ),
-      },
+      
       {
         path: "/challenges-join/:id",
         element: (
@@ -94,10 +90,6 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/profile",
-        element: <Profile />,
-      },
-      {
         path: "/login",
         element: <LoginPage></LoginPage>,
       },
@@ -111,23 +103,54 @@ const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About/>,
+        element: <About />,
       },
       {
         path: "/contact",
-        element: <Contact/>,
+        element: <Contact />,
       },
       {
         path: "/accessibility",
-        element: <Accessibility/>,
+        element: <Accessibility />,
       },
       {
         path: "/privacy",
-        element: <Privacy/>,
+        element: <Privacy />,
       },
       {
         path: "/terms",
-        element: <Terms/>,
+        element: <Terms />,
+      },
+    ],
+  },
+  // userDashboard
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <UserDashboardLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        index:true,
+        element: <DashboardHome/>,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+      {
+        path: "my-activities",
+        element: <MyActivity />,
+      },
+      {
+        path: "challenges-add",
+        element: (
+          
+            <AddNewChallenges/>
+          
+        ),
       },
     ],
   },

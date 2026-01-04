@@ -8,7 +8,7 @@ const ChallengeDetails = () => {
   } = challenge || {};
 
   return (
-    <section className="py-16 bg-gradient-to-br from-green-50 to-emerald-100 min-h-screen">
+    <section className="py-16 bg-linear-to-br from-green-50 to-emerald-100 min-h-screen">
       <div className="max-w-6xl mx-auto bg-white shadow-xl rounded-3xl p-10 flex flex-col md:flex-row-reverse items-center gap-10">
         <div className="flex-1 space-y-5">
           <h1 className="text-4xl font-extrabold text-green-900">{title}</h1>

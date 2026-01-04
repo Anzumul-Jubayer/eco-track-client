@@ -26,9 +26,7 @@ const Navbar = () => {
       <NavLink to="/my-activities" className="lg:mr-10 font-semibold">
         My Activities
       </NavLink>
-      <NavLink to="/challenges-add" className="lg:mr-10 font-semibold">
-        Add Challenge
-      </NavLink>
+      
     </>
   );
 
@@ -114,16 +112,13 @@ const Navbar = () => {
                       {user.displayName || "User"}
                     </span>
                   </li>
+                  
                   <li>
-                    <Link to="/profile" className=" text-green-400">
-                      Profile
+                    <Link to="/dashboard" className=" text-green-400">
+                      Dashboard
                     </Link>
                   </li>
-                  <li>
-                    <Link to="/my-activities" className=" text-green-400">
-                      My Activities
-                    </Link>
-                  </li>
+                  
                   <li>
                     <button
                       onClick={handleLogout}
