@@ -56,24 +56,17 @@ const LoginPage = () => {
     }
   };
 
-  //  Demo Login
-  const handleDemoLogin = () => {
-    const demoEmail = "kablumama@gmail.com";
-    const demoPassword = "Abc@12";
 
-    setEmail(demoEmail);
-    setPassword(demoPassword);
+const handleDemoLogin = () => {
+  const demoEmail = "kablumama@gmail.com";
+  const demoPassword = "Abc@12";
 
-    SetLoading(true);
-    signIn(demoEmail, demoPassword)
-      .then((res) => {
-        setUser(res.user);
-        toast.success("Demo login successful!");
-        navigate("/");
-      })
-      .catch((err) => toast.error(err.code))
-      .finally(() => SetLoading(false));
-  };
+  setEmail(demoEmail);
+  setPassword(demoPassword);
+
+  
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-green-50 via-emerald-100 to-green-200 py-10">
